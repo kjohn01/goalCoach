@@ -8,11 +8,11 @@ import './index.css';
 firebaseApp.auth().onAuthStateChanged(user => {
     if (user) {
         console.log('user presented');
-        
+        browserHistory.push('app');
     }
     else {
         console.log('no active user');
-        
+        browserHistory.replace('signin');
     }
 });
 
