@@ -1,0 +1,11 @@
+input {
+    margin: 5%;
+}
+
+.border-danger {
+    border-color: red;
+}
+
+.frame {
+    padding: 5%;
+}
