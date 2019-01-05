@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { firebaseApp } from '../firebase';
+import { auth } from '../firebase';
+import { AddGoals } from '../components';
 
 class App extends Component {
     constructor(props) {
@@ -10,12 +11,15 @@ class App extends Component {
     }
 
     signOut() {
-        firebaseApp.auth().signOut();
+        auth.signOut();
     }
 
     render() {
         return(
             <div className="frame">
+                <h3>GOALS</h3>
+                <AddGoals />
+                <div>Goal list</div>
                 <button className="btn btn-danger" onClick={this.signOut}>
                     Sign Out
                 </button>
@@ -25,12 +29,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state', state);
+  console.log('app state', state);
   return {};
 };
 
-const mapDispatchToProps = {
-  
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, null)(App)

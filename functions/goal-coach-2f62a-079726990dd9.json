@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "goal-coach-2f62a",
+  "private_key_id": "079726990dd949b297ee4942524267a1d7a9d164",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGO/pM4euflWvS\n/GwjuFMxbllOhKwIDxFj2ntmNI6t0pXONyI8MWOkWRq4dKpnBIm8PGfiwnDEVoK1\nKU9p+srI0PbMczkeZIrok/Bb3+ajLzyu8L7rMNB3o4zMW66O/5kmueD+bPvp+yAC\n+57lSjDpV+P4flGehfqKwV5BPw5R50K7+UhYfJ1y7Odz6SLvYicTPgOcOshM5nD0\nwM+gXqIRqwhNLFU+P2p6YhndDqnTX7ZrCpnhdPBcFuF89cjRs/X4xlGFN6WHO3rp\nKvvkwBDxWUEg5tgTqxhOI10miMd0nom7fZ2xuhL+/mE0SJYM5o7NBQnBfr3uhG8b\nMgyBHgMHAgMBAAECggEAQCoXyZzy5JO78+4KnsFCBGUAeT7OZElkSprkiF+Is1DP\ndpE3/p3J7997m6r/oRrB7nDq+2YOlC6gXj1B3D72NmwVBnZhTaojoEaKbWKax8U5\ncjKwyXXidGc24srmRJkNHJDb996U59aGNRD3DKaoEE+Hld5lUtdxEkqm1J2xZ+bN\npjh6T0Od9/seJzhORORkRS/uQDOCYSnDFMIkXEWL8NWkFYVjWXHoRkNwuUYh0gAh\n5NVtNDkmLvRcdMOHh79m0aiFtrqYktokcLl3l2mxwTMllPFJ0b1vobUUGHh1IQEA\nX97L51L4GKeeJ5V5EegABmsDUBwB2h9yCKF5wWgR4QKBgQD3Q3a0jlw7gl12YnLz\nqNe6ybZuAzjdFGqiOLtE4jdb070We/ftrX9OVEOs3AaAO4uW/p2RKo7QqJ1y/3VH\n4zi+HDqpl6eKSqfBugRnR5jM/KVuhiY3Kfiq5skgzkL4lknlrRJMseJ0mqih4/W+\nINObULY82o9cwbDeB8PPFmA0lwKBgQDNPQl97/kMx7iOVEbrkj9xLgxXBey7e7mn\nSis0eaf6USvISf0Df75QsPQRKEqC97XCwNN908YHqQROVuJiXBvG7YJVvcszOPjc\nwzDb1DqGKZ9C5ZaP6JuXD5vpnI8po5HSR1Fu4OOiKWXfYE5k/kvEt306wZrLgVwU\nLrjy3KFDEQKBgG7BvW5rRk0xvAPHXY5fVyLIL/tfXh1Jg+peVyQn4Hw1gEGODiRc\nzuWbQSUw+Yh/I6vjKVlZIte8b6qPW010LnqZ0n0c/WMoxbQ1Sruoin1nvgKf/IZB\nOq3y6qzTN5R6XWeP+t533+QzUs4ReoZL1f2ATeE8VXNLH5qVB9S/RSDJAoGBAJfw\n5gQMEm65tRH5pn9jx//8PTp3smiiEjGdIRs6LXeNfEJNNDjQ645FUosZLwCCbld9\n9ZSjoWmuYPe2LubulcnRr7nWRobnWKXnA1bbaXBFhBg8bBih9f4BmkV6mCoVZDEu\nh0T0zNESoM6cN61g7ar2xIkpJ3YdkJOIe3egiuphAoGBAK5rRBYBkdworJ9KYb3r\nVbi2y7H3jVK9yEEa3XBU5kwbt9R86ifMhMS+RPfr5ZV3JPLO6EkIQzyiXmpBZa7E\n8MxfF1kT65dwkehH4eYGT1aQdlxQGhMi7TXCWwETyEWfCfT9epvf/gaYY8yjLJQp\nzrGDnzyj3HFY8v3zhNRBuQlZ\n-----END PRIVATE KEY-----\n",
+  "client_email": "goal-coach-2f62a@appspot.gserviceaccount.com",
+  "client_id": "106523396623850871792",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/goal-coach-2f62a%40appspot.gserviceaccount.com"
+}

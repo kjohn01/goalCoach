@@ -1,9 +1,11 @@
 import { SIGNED_IN } from '../constants';
 
-const logUser = (email) => {
+const logUser = (uid, email, goals) => {
     const action = {
         type: SIGNED_IN,
-        email 
+        uid,
+        email, 
+        goals 
     };
     return action;
 }

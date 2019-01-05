@@ -5,22 +5,32 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import reducer from './reducers';
 import logUser from './actions';
-import { firebaseApp } from './firebase';
+import { auth, firestore } from './firebase';
 import { App, SignIn, SignUp } from './components';
 import './index.css';
 
 
 const store = createStore(reducer);
 
-firebaseApp.auth().onAuthStateChanged(user => {
+auth.onAuthStateChanged(user => {
     if (user) {
-        const { email } = user;
-        store.dispatch(logUser(email));
+        const { uid, email } = user;
+        const userRef = firestore.collection('users').doc(uid);
+        userRef.update({
+            presence: true
+        }).then(() => {
+            userRef.onSnapshot((doc) => {
+                const { goals } = doc.data();
+                store.dispatch(logUser(uid, email, goals));
+            });
+        })
         console.log('user presented');
         browserHistory.push('app');
     }
     else {
         console.log('no active user');
+        const unsubscribe = firestore.collection('users').onSnapshot(() => {});
+        unsubscribe();
         browserHistory.replace('signin');
     }
 });

@@ -9,4 +9,14 @@ const config = {
     messagingSenderId: "881634486041"
 };
 
-export const firebaseApp = firebase.initializeApp(config);
+const firebaseApp = firebase.initializeApp(config);
+
+const db = firebase.firestore();
+
+// Disable deprecated features
+db.settings({
+  timestampsInSnapshots: true
+});
+
+export const auth = firebaseApp.auth();
+export const firestore = db;
