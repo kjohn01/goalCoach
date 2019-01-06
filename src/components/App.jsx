@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { auth, firestore } from '../firebase';
-import { AddGoals, GoalList } from '../components';
+import { AddGoals, GoalList, CompletedGoalList } from '../components';
 
 class App extends Component {
     constructor(props) {
@@ -22,9 +22,13 @@ class App extends Component {
     render() {
         return(
             <div className="frame">
-                <h3>GOALS</h3>
+                <h1>GOAL COACH</h1>
                 <AddGoals />
+                <hr />
                 <GoalList />
+                <hr />
+                <CompletedGoalList />
+                <hr />
                 <button className="btn btn-danger" onClick={this.signOut}>
                     Sign Out
                 </button>

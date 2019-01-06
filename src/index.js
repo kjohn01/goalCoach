@@ -4,11 +4,10 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux'; 
 import { Router, Route, browserHistory } from 'react-router';
 import reducer from './reducers';
-import { logUser, setGoals } from './actions';
+import { logUser, logOut, setGoals, setCompletedGoals } from './actions';
 import { auth, firestore } from './firebase';
 import { App, SignIn, SignUp } from './components';
 import './index.css';
-
 
 const store = createStore(reducer);
 
@@ -23,17 +22,18 @@ auth.onAuthStateChanged(user => {
             merge: true
         }).then(() => {
             userRef.onSnapshot((doc) => {
-                const { goals } = doc.data();
+                const { goals, completedGoals } = doc.data();
                 store.dispatch(logUser(uid, email));
                 store.dispatch(setGoals(goals));
+                store.dispatch(setCompletedGoals(completedGoals));
             })
-            
         })
         browserHistory.push('app');
     }
     else {
-        const unsubscribe = firestore.collection('users').onSnapshot(() => {});
-        unsubscribe();
+        firestore.collection('users').onSnapshot(() => {
+            store.dispatch(logOut());
+        });
         browserHistory.replace('signin');
     }
 });

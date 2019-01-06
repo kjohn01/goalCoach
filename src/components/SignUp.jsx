@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { Link, browserHistory } from 'react-router';
 import { auth } from '../firebase';
 
 class SignUp extends Component {
@@ -20,10 +21,10 @@ class SignUp extends Component {
     }
 
     render() {
+        if (this.props.user) browserHistory.replace('app');
         const classes = classNames(
             'form-control', this.state.error.message ? 'border-danger' : ''
         );
-
         return(
             <div className="form-inline frame">
                 <h2>Sign Up</h2>
@@ -51,4 +52,9 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+    const { user } = state;
+    return { user };
+};
+
+export default connect(mapStateToProps, null)(SignUp);

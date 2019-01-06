@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { firestore } from '../firebase';
-import { setGoals } from '../actions';
+import { GoalItem } from '../components';
 
 export class GoalList extends Component {
   constructor(props) {
@@ -13,9 +12,10 @@ export class GoalList extends Component {
     const { goals } = this.props;
     return (
       <div>
+        <h3>Goals</h3>
         {
-            goals.map(goal => {
-                return <h5 key={goals.indexOf(goal)}>{goal}</h5>
+            goals.map((goal, index) => {
+                return <GoalItem key={index} goal={goal} />
             })
         }
       </div>
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
   return { user, goals };
 };
 
-export default connect(mapStateToProps, { setGoals })(GoalList);
+export default connect(mapStateToProps, null)(GoalList);

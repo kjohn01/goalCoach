@@ -1,4 +1,4 @@
-import { SIGNED_IN, SET_GOALS } from '../constants';
+import { SIGNED_IN, SIGNED_OUT, SET_GOALS, SET_COMPELETD_GOALS } from '../constants';
 
 export const logUser = (uid, email) => {
     const action = {
@@ -7,7 +7,16 @@ export const logUser = (uid, email) => {
         email 
     };
     return action;
-}
+};
+
+export const logOut = () => {
+    const action = {
+        type: SIGNED_OUT,
+        uid: '',
+        email: ''
+    };
+    return action;
+};
 
 export const setGoals = (goals) => {
     const action = {
@@ -15,4 +24,12 @@ export const setGoals = (goals) => {
         goals
     };
     return action;
-}
+};
+
+export const setCompletedGoals = (completedGoals) => {
+    const action = {
+        type: SET_COMPELETD_GOALS,
+        completedGoals
+    };
+    return action;
+};
