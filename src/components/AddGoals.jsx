@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames';
 import { firestore } from '../firebase';
+import { isNonEmptyString, isValidDate } from '../utilities';
 
 const initialState = {
     title: '',
     dueDate: 0,
     error: null,
-    titleError: null,
-    dueDateError: null
+    isTitleValid: true,
+    isDueDateValid: true
 };
 
 export class AddGoals extends Component {
@@ -20,15 +21,9 @@ export class AddGoals extends Component {
     }
 
     checkNewGoal(newGoal) {
-        const now = new Date();
-        const isTitleValid = newGoal.title.length > 0;
-        const isDueDateValid = newGoal.dueDate - now > 0;
-        if (!isTitleValid) this.setState({ 
-            titleError: 'What is your new goal?'
-        })
-        if (!isDueDateValid) this.setState({
-            dueDateError: 'plz select someday in the future'
-        })
+        const isTitleValid = isNonEmptyString(newGoal.title);
+        const isDueDateValid = isValidDate(newGoal.dueDate);
+        this.setState({ isTitleValid, isDueDateValid });
         return isTitleValid && isDueDateValid;
     }
     
@@ -53,14 +48,23 @@ export class AddGoals extends Component {
     }
 
     render() {
-        const { title, dueDate, error, titleError, dueDateError } = this.state;
+        const { 
+            title, 
+            dueDate, 
+            error, 
+            isTitleValid, 
+            isDueDateValid 
+        } = this.state;
+
         const inputClasses = classNames(
-            'form-control', error || titleError ? 'border-danger' : ''
+            'form-control', error || !isTitleValid ? 'border-danger' : ''
         );
         const calendarClasses = classNames(
-            'form-control', error || dueDateError ? 'border-danger' : ''
+            'form-control', error || !isDueDateValid ? 'border-danger' : ''
         );
+
         if (!this.props.user) return null;
+
         return (
             <div className="form-inline">
                 <div className="form-group">
@@ -69,21 +73,24 @@ export class AddGoals extends Component {
                         value={title}
                         placeholder="add a goal" 
                         onKeyPress={event => {
-                            if(event.key === 'Enter') this.submit();
-                            else return;
+                            if (event.key === 'Enter') this.submit();
                         }}
                         onChange={event => this.setState({ title: event.target.value })} />
-                    <h5>{titleError}</h5>
+                    {
+                        !isTitleValid && <h5>What is your new goal?</h5>
+                    }
+
                     <input className={calendarClasses} 
-                        type="calendar" 
+                        type="datetime-local" 
                         value={dueDate}
-                        placeholder="add a goal" 
                         onKeyPress={event => {
-                            if(event.key === 'Enter') this.submit();
-                            else return;
+                            if (event.key === 'Enter') this.submit();
                         }}
                         onChange={event => this.setState({ dueDate: event.target.value })} />
-                    <h5>{dueDateError}</h5>
+                    {
+                        !isDueDateValid && <h5>plz select someday in the future</h5>
+                    }
+                    
                     <button type="button" 
                         className="btn btn-success"
                         onClick={this.submit} >

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setCompletedGoals } from '../actions';
 import { CompletedGoalItem } from '../components';
 import { firestore } from '../firebase';
 
 export class CompletedGoalList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      expanded: true
+    };
     this.clear = this.clear.bind(this);
+    this.toggleExpand = this.toggleExpand.bind(this);
   }
 
   clear() {
@@ -17,11 +19,24 @@ export class CompletedGoalList extends Component {
     });
   }
 
+  toggleExpand() {
+    this.setState({ expanded: !this.state.expanded });
+  }
+
   render() {
     const { completedGoals } = this.props;
     return (
       <div>
-        <h3>Completed Goals</h3>
+        <div>
+          <h3>Completed Goals</h3>
+          <button className="btn btn-xs" onClick={this.toggleExpand}>
+            {
+              this.state.expanded 
+                ? 'Hide'
+                : 'Show'
+            }
+          </button>
+        </div>
         {
             completedGoals.map((completedGoal, index) => {
                 return <CompletedGoalItem key={index} completedGoal={completedGoal} />
@@ -40,4 +55,4 @@ const mapStateToProps = (state) => {
   return { user, completedGoals };
 };
 
-export default connect(mapStateToProps, { setCompletedGoals })(CompletedGoalList);
+export default connect(mapStateToProps, null)(CompletedGoalList);

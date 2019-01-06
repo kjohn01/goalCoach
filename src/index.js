@@ -26,7 +26,7 @@ auth.onAuthStateChanged(user => {
                 store.dispatch(logUser(uid, email));
                 store.dispatch(setGoals(goals));
                 store.dispatch(setCompletedGoals(completedGoals));
-            })
+            });
         })
         browserHistory.push('app');
     }

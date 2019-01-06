@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { firestore } from '../firebase';
 
 export class GoalItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      overDue: false
+    }
     this.complete = this.complete.bind(this);
     this.remove = this.remove.bind(this);
   }
@@ -40,12 +44,19 @@ export class GoalItem extends Component {
     })
   }
 
+  componentDidMount() {
+    if (moment(new Date(this.props.goal.dueDate)).isBefore()) this.setState({ overDue: true });
+  }
+
   render() {
     const { goal } = this.props;
+    const classes = classNames(
+      this.state.overDue ? 'border border-danger' : ''
+    );
     return (
-      <div className="">
+      <div className={classes}>
         <h3>{goal.title}</h3>
-        <h4>{new Date(goal.dueDate)}</h4>
+        <h4>{moment(new Date(goal.dueDate)).fromNow()}</h4>
         <button className="btn btn-sm btn-primary" onClick={this.complete} >
             Complete
         </button>

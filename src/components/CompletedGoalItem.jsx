@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { firestore } from '../firebase';
 
 export class GoalItem extends Component {
@@ -31,7 +32,7 @@ export class GoalItem extends Component {
     return (
       <div className="">
         <h3>{completedGoal.title}</h3>
-        <h4>{new Date(completedGoal.completedDate)}</h4>
+        <h4>{moment(new Date(completedGoal.completedDate)).fromNow()}</h4>
         <button className="btn btn-sm btn-primary" onClick={this.remove} >
             X Remove
         </button>
