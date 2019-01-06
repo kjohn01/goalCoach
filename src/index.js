@@ -16,8 +16,11 @@ auth.onAuthStateChanged(user => {
     if (user) {
         const { uid, email } = user;
         const userRef = firestore.collection('users').doc(uid);
-        userRef.update({
-            presence: true
+        userRef.set({
+            presence: true,
+            email
+        }, {
+            merge: true
         }).then(() => {
             userRef.onSnapshot((doc) => {
                 const { goals } = doc.data();

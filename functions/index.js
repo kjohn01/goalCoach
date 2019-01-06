@@ -5,7 +5,7 @@ admin.initializeApp();
 exports.createUser = functions.auth.user().onCreate((user) => {
     firestore.collection('users').doc(user.uid).set({
         email: user.email,
-        goals: {},
+        goals: [],
         presence: true
     })
         .then((docRef) => {

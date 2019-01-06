@@ -16,9 +16,12 @@ export class AddGoals extends Component {
     submit() {
         console.log('submit this', this);
         const { newGoal } = this.state;
-        if (newGoal.length() > 0) {
+        let { goals } = this.props;
+        if (newGoal.length > 0) {
+            if (!goals) goals = [newGoal];
+            else goals.push(newGoal);
             firestore.collection('users').doc(this.props.uid).update({
-                goals: firestore.FieldValue.arrayUnion(newGoal)
+                goals
             })
                 .then(() => {
                     this.setState({ newGoal: '', error: null });
@@ -74,8 +77,8 @@ export class AddGoals extends Component {
 
 const mapStateToProps = (state) => {
     console.log('add goal state', state);
-    const { uid } = state;
-    return { uid };
+    const { uid, goals } = state;
+    return { uid, goals };
 };
 
 export default connect(mapStateToProps, null)(AddGoals)

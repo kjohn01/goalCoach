@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { auth } from '../firebase';
+import { auth, firestore } from '../firebase';
 import { AddGoals } from '../components';
 
 class App extends Component {
@@ -11,7 +11,12 @@ class App extends Component {
     }
 
     signOut() {
-        auth.signOut();
+        auth.signOut()
+            .then(() => {
+                firestore.collection('users').doc(this.props.uid).update({
+                    presence: false
+                });
+            });
     }
 
     render() {
@@ -30,7 +35,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   console.log('app state', state);
-  return {};
+  const { uid } = state;
+  return { uid };
 };
 
 export default connect(mapStateToProps, null)(App)
