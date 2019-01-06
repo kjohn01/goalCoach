@@ -1,4 +1,4 @@
-import { SIGNED_IN, SIGNED_OUT, SET_GOALS, SET_COMPELETD_GOALS } from '../constants';
+import { SIGNED_IN, SIGNED_OUT, SET_GOALS, SET_COMPLETED_GOALS } from '../constants';
 
 export const logUser = (uid, email) => {
     const action = {
@@ -28,7 +28,7 @@ export const setGoals = (goals) => {
 
 export const setCompletedGoals = (completedGoals) => {
     const action = {
-        type: SET_COMPELETD_GOALS,
+        type: SET_COMPLETED_GOALS,
         completedGoals
     };
     return action;

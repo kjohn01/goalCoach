@@ -30,9 +30,7 @@ export class GoalList extends Component {
           </button>
         </div>
         {
-            goals.map((goal, index) => {
-                return <GoalItem key={index} goal={goal} />
-            })
+            goals.map((goal, index) => <GoalItem key={index} goal={goal} />)
         }
       </div>
     )

@@ -6,7 +6,7 @@ import { isNonEmptyString, isValidDate } from '../utilities';
 
 const initialState = {
     title: '',
-    dueDate: 0,
+    dueDate: '',
     error: null,
     isTitleValid: true,
     isDueDateValid: true
@@ -77,7 +77,9 @@ export class AddGoals extends Component {
                         }}
                         onChange={event => this.setState({ title: event.target.value })} />
                     {
-                        !isTitleValid && <h5>What is your new goal?</h5>
+                        !isTitleValid && <h5 className="text-danger">
+                            What is your new goal?
+                        </h5>
                     }
 
                     <input className={calendarClasses} 
@@ -88,7 +90,9 @@ export class AddGoals extends Component {
                         }}
                         onChange={event => this.setState({ dueDate: event.target.value })} />
                     {
-                        !isDueDateValid && <h5>plz select someday in the future</h5>
+                        !isDueDateValid && <h5 className="text-danger">
+                            plz select someday in the future
+                        </h5>
                     }
                     
                     <button type="button" 

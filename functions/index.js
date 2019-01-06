@@ -2,10 +2,13 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-exports.createUser = functions.auth.user().onCreate((user) => {
+const firestore = admin.firestore();
+
+exports.registerUser = functions.auth.user().onCreate((user) => {
     firestore.collection('users').doc(user.uid).set({
         email: user.email,
         goals: [],
+        completedGoals: [],
         presence: true
     })
         .then((docRef) => {

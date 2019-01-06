@@ -38,9 +38,7 @@ export class CompletedGoalList extends Component {
           </button>
         </div>
         {
-            completedGoals.map((completedGoal, index) => {
-                return <CompletedGoalItem key={index} completedGoal={completedGoal} />
-            })
+            completedGoals.map((completedGoal, index) => <CompletedGoalItem key={index} completedGoal={completedGoal} />)
         }
         <button className="btn btn-sm btn-primary" onClick={this.clear}>
             clear

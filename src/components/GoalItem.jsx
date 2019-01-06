@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { firestore } from '../firebase';
+import * as firebase from 'firebase';
 
 export class GoalItem extends Component {
   constructor(props) {
@@ -16,31 +16,34 @@ export class GoalItem extends Component {
   }
 
   static propTypes = {
-    index: PropTypes.number.isRequired,
     goal: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        dueDate: PropTypes.number.isRequired
+        dueDate: PropTypes.string.isRequired
     })
   }
 
   remove() {
     const { user, goal } = this.props;
-    const userRef = firestore.collection('users').doc(user.uid);
+    const userRef = firebase.firestore().collection('users').doc(user.uid);
     userRef.update({
-        goals: firestore.FieldValue.arrayRemove(goal)
+        goals: firebase.firestore.FieldValue.arrayRemove(goal)
     })
   }
 
   complete() {
     const { user } = this.props;
-    const userRef = firestore.collection('users').doc(user.uid);
+    const userRef = firebase.firestore().collection('users').doc(user.uid);
+    const completedDate = Date.now();
     let { completedGoals, goal } = this.props;
-    goal.completeDate = new Date();
+    goal = {
+      completedDate,
+      ...goal
+    }
     if (!completedGoals) completedGoals = [goal];
     else completedGoals.push(goal);
     userRef.update({
-        goals: firestore.FieldValue.arrayRemove(this.props.goal),
-        completedGoals
+      goals: firebase.firestore.FieldValue.arrayRemove(this.props.goal),
+      completedGoals
     })
   }
 

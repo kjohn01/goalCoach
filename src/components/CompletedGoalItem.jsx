@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { firestore } from '../firebase';
+import * as firebase from 'firebase';
 
 export class GoalItem extends Component {
   constructor(props) {
@@ -12,7 +12,6 @@ export class GoalItem extends Component {
   }
 
   static propTypes = {
-    index: PropTypes.number.isRequired,
     completedGoal: PropTypes.shape({
         title: PropTypes.string.isRequired,
         completedDate: PropTypes.number.isRequired
@@ -21,9 +20,9 @@ export class GoalItem extends Component {
 
   remove() {
     const { user, completedGoal } = this.props;
-    const userRef = firestore.collection('users').doc(user.uid);
+    const userRef = firebase.firestore().collection('users').doc(user.uid);
     userRef.update({
-        completedGoals: firestore.FieldValue.arrayRemove(completedGoal)
+        completedGoals: firebase.firestore.FieldValue.arrayRemove(completedGoal)
     })
   }
 

@@ -21,7 +21,7 @@ class SignIn extends Component {
     }
 
     render() {
-        if (this.props.user) browserHistory.replace('app');
+        if (this.props.user.uid !== '') browserHistory.replace('app');
         const classes = classNames(
             'form-control', this.state.error.message ? 'border-danger' : ''
         );
