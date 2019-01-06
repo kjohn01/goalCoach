@@ -1,13 +1,18 @@
-import { SIGNED_IN } from '../constants';
+import { SIGNED_IN, SET_GOALS } from '../constants';
 
-const logUser = (uid, email, goals) => {
+export const logUser = (uid, email) => {
     const action = {
         type: SIGNED_IN,
         uid,
-        email, 
-        goals 
+        email 
     };
     return action;
 }
 
-export default logUser;
+export const setGoals = (goals) => {
+    const action = {
+        type: SET_GOALS,
+        goals
+    };
+    return action;
+}

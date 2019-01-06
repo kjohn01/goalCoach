@@ -20,7 +20,7 @@ export class AddGoals extends Component {
         if (newGoal.length > 0) {
             if (!goals) goals = [newGoal];
             else goals.push(newGoal);
-            firestore.collection('users').doc(this.props.uid).update({
+            firestore.collection('users').doc(this.props.user.uid).update({
                 goals
             })
                 .then(() => {
@@ -46,7 +46,7 @@ export class AddGoals extends Component {
         const inputClasses = classNames(
             'form-control', error ? 'border-danger' : ''
         );
-        if (!this.props.uid) return null;
+        if (!this.props.user) return null;
         return (
             <div className="form-inline">
                 <div className="form-group">
@@ -76,9 +76,8 @@ export class AddGoals extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('add goal state', state);
-    const { uid, goals } = state;
-    return { uid, goals };
+    const { user, goals } = state;
+    return { user, goals };
 };
 
 export default connect(mapStateToProps, null)(AddGoals)

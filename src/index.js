@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux'; 
 import { Router, Route, browserHistory } from 'react-router';
 import reducer from './reducers';
-import logUser from './actions';
+import { logUser, setGoals } from './actions';
 import { auth, firestore } from './firebase';
 import { App, SignIn, SignUp } from './components';
 import './index.css';
@@ -24,14 +24,14 @@ auth.onAuthStateChanged(user => {
         }).then(() => {
             userRef.onSnapshot((doc) => {
                 const { goals } = doc.data();
-                store.dispatch(logUser(uid, email, goals));
-            });
+                store.dispatch(logUser(uid, email));
+                store.dispatch(setGoals(goals));
+            })
+            
         })
-        console.log('user presented');
         browserHistory.push('app');
     }
     else {
-        console.log('no active user');
         const unsubscribe = firestore.collection('users').onSnapshot(() => {});
         unsubscribe();
         browserHistory.replace('signin');

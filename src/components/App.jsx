@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { auth, firestore } from '../firebase';
-import { AddGoals } from '../components';
+import { AddGoals, GoalList } from '../components';
 
 class App extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class App extends Component {
     signOut() {
         auth.signOut()
             .then(() => {
-                firestore.collection('users').doc(this.props.uid).update({
+                firestore.collection('users').doc(this.props.user.uid).update({
                     presence: false
                 });
             });
@@ -24,7 +24,7 @@ class App extends Component {
             <div className="frame">
                 <h3>GOALS</h3>
                 <AddGoals />
-                <div>Goal list</div>
+                <GoalList />
                 <button className="btn btn-danger" onClick={this.signOut}>
                     Sign Out
                 </button>
@@ -34,9 +34,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('app state', state);
-  const { uid } = state;
-  return { uid };
+  const { user } = state;
+  return { user };
 };
 
 export default connect(mapStateToProps, null)(App)
